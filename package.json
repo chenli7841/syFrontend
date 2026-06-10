@@ -70,8 +70,10 @@
     "@vue/shared": "^3.0.0",
     "core-js": "^3.8.3",
     "flyio": "^0.6.2",
+    "uview-ui": "^1.8.8",
     "vue": ">= 2.6.14 < 2.7",
-    "vuex": "^3.2.0"
+    "vuex": "^3.2.0",
+    "yjh5": "file:"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.3.2",
@@ -91,7 +93,10 @@
     "babel-plugin-import": "^1.11.0",
     "cross-env": "^7.0.2",
     "jest": "^25.4.0",
+    "less": "^4.4.2",
+    "less-loader": "^12.3.0",
     "postcss-comment": "^2.0.0",
+    "sass": "^1.93.2",
     "vue-template-compiler": ">= 2.6.14 < 2.7"
   },
   "browserslist": [

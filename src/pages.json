@@ -1,16 +1,614 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "首页",
+				"app-plus": {
+					"titleNView": false
+				}
+		
+			}
+		},
+		{
+			"path": "pages/index/topUp/pay",
+			"style": {
+				"navigationBarTitleText": "账户充值"
+			}
+		},
+		{
+			"path": "pages/index/topUp/zfb",
+			"style": {
+				"navigationBarTitleText": "账户充值"
+			}
+		},
+		{
+			"path": "pages/index/topUp/visa",
+			"style": {
+				"navigationBarTitleText": "账户充值"
+			}
+		},
+		{
+			"path": "pages/index/topUp/billInfo",
+			"style": {
+				"navigationBarTitleText": "账单明细"
+			}
+		},
+		{
+			"path": "pages/test/test",
+			"style": {
+				"navigationBarTitleText": "结果"
+				
+		
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/login/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		}, 
+
+		{
+			"path": "pages/home/the/new",
+			"style": {
+				"navigationBarTitleText": "收件地址"
+			}
+		},
+
+
+
+
+
+
+
+	
+	{
+		"path": "pages/index/return/why",
+		"style": {
+			"navigationBarTitleText": "退运原因和地址"
+		}
+	},
+
+	{
+		"path": "pages/index/return/center",
+		"style": {
+			"navigationBarTitleText": "退运中心"
+		}
+	},
+
+	{
+		"path": "pages/index/return/ones",
+		"style": {
+			"navigationBarTitleText": "申请退运包裹",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "筛选查询",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+					}]
+				}
 			}
 		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+	},
+
+	{
+		"path": "pages/index/parcel/parcel",
+		"style": {
+			"navigationBarTitleText": "我的包裹"
+		}
+	},
+	{
+		"path": "pages/index/topUp/topUp",
+		"style": {
+			"navigationBarTitleText": "账户充值"
+		}
+	},
+	{
+		"path": "pages/index/topUp/toUp",
+		"style": {
+			"navigationBarTitleText": "账户充值"
+		}
+	},
+
+	{
+
+		"path": "pages/index/extractGoods/extractGoods",
+		"style": {
+			"navigationBarTitleText": "提货管理",
+			"navigationBarBackgroundColor": "#fff",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+
+					}]
+				}
+			}
+		}
+	},
+	{
+
+		"path": "pages/index/toBe/coning",
+		"style": {
+			"navigationBarTitleText": "未匹配包裹",
+			
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "筛选查询",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+			
+					}]
+				}
+			}
+		}
+	},
+	{
+		"path": "pages/index/toBe/route",
+		"style": {
+			"navigationBarTitleText": "线路"		
+		}
+	},
+	{
+		"path": "pages/policy/policy",
+		"style": {
+			"navigationBarTitleText": "运输细则"		
+		}
+	},
+	{
+		"path": "pages/policy/ocean",
+		"style": {
+			"navigationBarTitleText": "海运细则"		
+		}
+	},
+	{
+		"path": "pages/policy/air",
+		"style": {
+			"navigationBarTitleText": "空运细则"		
+		}
+	},
+	{
+		"path": "pages/announcement/announcement",
+		"style": {
+			"navigationBarTitleText": "公告"		
+		}
+	},
+	{
+		"path": "pages/announcement/commonquestion",
+		"style": {
+			"navigationBarTitleText": "常见问题"		
+		}
+	},
+	{
+		"path": "pages/announcement/createorderguideline",
+		"style": {
+			"navigationBarTitleText": "创建包裹流程"		
+		}
+	},
+	{
+		"path": "pages/chinaaddress/chinaaddress",
+		"style": {
+			"navigationBarTitleText": "国内仓库地址"
+		}
+	},
+	{
+		"path": "pages/index/parcel/search",
+		"style": {
+			"navigationBarTitleText": "查询运单",
+			"navigationBarTextStyle":"white",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "筛选查询",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+					}]
+				}
+			}
+		}
+	},
+	{
+		"path": "pages/customerservice/customerservice",
+		"style": {
+			"navigationBarTitleText": "客服"
+		}
+	},
+	{
+		"path": "pages/announcement/insurancepolicy",
+		"style": {
+			"navigationBarTitleText": "保险条例"
+		}
+	},
+	{
+		"path": "pages/announcement/systemdescription",
+		"style": {
+			"navigationBarTitleText": "系统简介"
+		}
+	},
+	{
+	
+		"path": "pages/index/toBe/warehouse",
+		"style": {
+			"navigationBarTitleText": "仓库"		
+		}
+	},
+	
+	{
+		"path": "pages/index/toBe/send",
+		"style": {
+			"navigationBarTitleText": "待发货包裹",
+			// "navigationBarBackgroundColor": "#fff",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "筛选查询",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+			
+					}]
+				}
+			}
+		}
+	},
+
+
+	{
+		"path": "pages/index/parcel/batch",
+		"style": {
+			"navigationBarTitleText": "批次详情"
+		}
+	},
+	{
+		"path": "pages/index/parcel/luggage",
+		"style": {
+			"navigationBarTitleText": "包裹详情"
+		}
+	},
+	{
+		"path": "pages/index/parcel/logistics",
+		"style": {
+			"navigationBarTitleText": "物流详情"
+		}
+	},
+	{
+		"path": "pages/index/toBe/confirmed",
+		"style": {
+			"navigationBarTitleText": "待确认包裹"
+			
+		}
+	},
+
+	{
+		"path": "pages/index/parcel/inParcels",
+		"style": {
+			"navigationBarTitleText": "",
+			"navigationBarTextStyle":"white",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "筛选查询",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+					}]
+				}
+			}
+		}
+	},
+	{
+		"path": "pages/index/bill/billings",
+		"style": {
+			"navigationBarTitleText": "账单明细"
+		}
+	},
+	{
+		"path": "pages/index/deliveryOrder/deliveryOrder",
+		"style": {
+			"navigationBarTitleText": "派送订单"
+		}
+	},
+	{
+		"path": "pages/index/deliveryOrder/want",
+		"style": {
+			"navigationBarTitleText": "我要派送",
+			
+			"navigationBarBackgroundColor": "#fff",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "筛选查询",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+					}]
+				}
+			}
+		}
+	},
+	{
+		"path": "pages/index/deliveryOrder/beBeing",
+		"style": {
+			"navigationBarTitleText": "正在派送订单",
+			"navigationBarBackgroundColor": "#fdfdfd",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "筛选查询",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+					}]
+				}
+			}
+			
+		}
+	},
+	{
+		"path": "pages/index/deliveryOrder/accomplish",
+		"style": {
+			"navigationBarTitleText": "已派送订单",
+			"navigationBarBackgroundColor": "#fff"
+		}
+	},
+	{
+		"path": "pages/index/flight/flight",
+		"style": {
+			"navigationBarTitleText": "进度查询",
+			"navigationBarBackgroundColor": "#fff"
+		}
+	},
+	{
+		"path": "pages/index/flight/logisticsDetails",
+		"style": {
+			"navigationBarTitleText": "物流状态",
+			"navigationBarBackgroundColor": "#fff"
+		}
+	},
+	{
+		"path": "pages/index/visit/visit",
+		"style": {
+			"navigationBarTitleText": "预约上门",
+			"navigationBarBackgroundColor": "#fff"
+		}
+	},
+	{
+		"path": "pages/index/bill/bill",
+		"style": {
+			"navigationBarTitleText": "账单系统"
+		}
+	},
+	{
+		"path": "pages/index/bill/daybill",
+		"style": {
+			"navigationBarTitleText": "日账单统计"
+		}
+	},
+	{
+		"path": "pages/index/check/take",
+		"style": {
+			"navigationBarTitleText": "待派送管理",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "筛选查询",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+					}]
+				}
+			}
+		}
+	},
+	{
+		"path": "pages/index/check/picksearch",
+		"style": {
+			"navigationBarTitleText": "提货查询"
+		}
+	},
+
+	{
+		"path": "pages/index/check/checklist",
+		"style": {
+			"navigationBarTitleText": "查单管理",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "筛选查询",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+					}]
+				}
+			}
+		}
+	},
+
+
+	{
+		"path": "pages/order/zero",
+		"style": {
+			"navigationBarTitleText": "创建运单"
+		}
+	},
+	{
+		"path": "pages/order/three",
+		"style": {
+			"navigationBarTitleText": "创建运单"
+		}
+	},
+	{
+		"path": "pages/order/three-cost-file",
+		"style": {
+			"navigationBarTitleText": "创建运单"
+		}
+	},
+	{
+		"path": "pages/order/two",
+		"style": {
+			"navigationBarTitleText": "创建运单"
+		}
+	},
+	{
+		"path": "pages/order/parts",
+		"style": {
+			"navigationBarTitleText": "填写内件物品信息"
+		}
+	},
+
+
+
+	{
+		"path": "pages/order/one",
+		"style": {
+			"navigationBarTitleText": "创建运单"
+		}
+	},
+
+	{
+		"path": "pages/order/order",
+		"style": {
+			"navigationBarTitleText": "创建运单"
+		}
+	},
+	{
+		"path": "pages/order/modify",
+		"style": {
+			"navigationBarTitleText": "修改运单"
+		}
+	},
+
+	{
+		"path": "pages/home/home",
+		"style": {
+			"navigationBarTitleText": "个人中心"
+		}
+	},
+	{
+		"path": "pages/home/code/code",
+		"style": {
+			"navigationBarTitleText": "我的二维码"
+		}
+	},
+	{
+		"path": "pages/home/the/goots",
+		"style": {
+			"navigationBarTitleText": "收件地址管理"
+		}
+	},
+	{
+		"path": "pages/home/the/new",
+		"style": {
+			"navigationBarTitleText": "收件地址"
+		}
+	},
+	{
+		"path": "pages/home/the/add",
+		"style": {
+			"navigationBarTitleText": "新增国内收货地址"
+		}
+	},
+
+
+	{
+		"path": "pages/home/pick/selectPick",
+		"style": {
+			"navigationBarTitleText": "取货点选择"
+		}
+	},
+	{
+		"path": "pages/home/pick/pick",
+		"style": {
+			"navigationBarTitleText": "取货点",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "切换",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+					}]
+				}
+			}
+		}
+	},
+
+
+	{
+		"path": "pages/home/my/info",
+		"style": {
+			"navigationBarTitleText": "我的资料"
+		}
+	},
+	{
+		"path": "pages/home/my/name",
+		"style": {
+			"navigationBarTitleText": "真实姓名",
+			"h5": {
+				"titleNView": {
+					"buttons": [{
+						"text": "保存",
+						"float": "right",
+						"fontSize": "14px",
+						"color": "#666666"
+					}]
+				}
+			}
+		}
 	}
+],
+"globalStyle": {
+	"navigationBarTitleText": "uni-app",
+	"navigationBarBackgroundColor": "#fff",
+	"backgroundColor": "#fff",
+	"navigationBarTextStyle":"white",
+	// "navigationStyle":"custom",
+	"h5":{
+		"titleNView":false
+	}
+},
+"easycom": {
+	"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+},
+"tabBar": {
+	"color": "#999999",
+	"selectedColor": "#5178FF",
+	"borderStyle": "black",
+	"backgroundColor": "#ffffff",
+	"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "https://eplusfile.blob.core.windows.net/shuyu/homeicon-homepage.svg",
+			"selectedIconPath": "https://eplusfile.blob.core.windows.net/shuyu/homeicon-homepage.svg",
+			"text": "首页"
+		},
+		{
+			"pagePath": "pages/order/order",
+			"iconPath": "https://eplusfile.blob.core.windows.net/shuyu/homeicon-createorder-bottom.svg",
+			"selectedIconPath": "https://eplusfile.blob.core.windows.net/shuyu/homeicon-createorder-bottom.svg",
+			"text": "创建运单"
+		},
+		{
+			"pagePath": "pages/home/home",
+			"iconPath": "https://eplusfile.blob.core.windows.net/shuyu/homeicon-me.svg",
+			"selectedIconPath": "https://eplusfile.blob.core.windows.net/shuyu/homeicon-me.svg",
+			"text": "我的"
+		}
+	]
+}
 }
