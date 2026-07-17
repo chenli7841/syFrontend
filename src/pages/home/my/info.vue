@@ -352,7 +352,7 @@ export default {
 						icon: 'none'
 					});
 					uni.clearStorage();
-					window.location.href = 'https://mobile.shuyu-global.com/#/pages/login/login';
+					this.request.redirectToLogin();
 				})
 				.catch(error => {});
 

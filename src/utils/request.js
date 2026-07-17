@@ -2,6 +2,15 @@
 const baseUrl = 'https://epluscanada.com';
 // const baseUrl = 'https://epluscanada.com';
 // const baseUrl = 'http://192.168.0.172:1001';
+
+// 本地开发时跳相对路径，避免整页跳到线上域名；生产环境仍跳线上登录页
+const loginUrl = process.env.NODE_ENV === 'development'
+	? '/#/pages/login/login'
+	: 'https://mobile.shuyu-global.com/#/pages/login/login';
+
+function redirectToLogin() {
+	window.location.href = loginUrl;
+}
 // resolve函数的作用是，将Promise对象的状态从“未完成”变为“成功”（即从 pending 变为 resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去
 // reject函数的作用是，将Promise对象的状态从“未完成”变为“失败”（即从 pending 变为 rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去
 //.then() Promise 实例添加状态改变时的回调函数 then方法的第一个参数是resolved状态的回调函数，第二个参数（可选）是rejectedm,
@@ -30,11 +39,11 @@ function myRequest(options, retry=3, domain='https://epluscanada.com') {
 					})
 					//setTimeout(function() {
 						uni.setStorageSync('YjaccessToken', '');
-						 window.location.href='https://mobile.shuyu-global.com/#/pages/login/login'
+						 redirectToLogin()
 						// uni.navigateTo({
 						// 	url: '/pages/login/login'
 						// })
-						
+
 					//}, 1500);
 				} else if (data.statusCode == 402) {
 					//uni.showToast({
@@ -44,7 +53,7 @@ function myRequest(options, retry=3, domain='https://epluscanada.com') {
 					//})
 					//setTimeout(function() {
 						uni.setStorageSync('YjaccessToken', '');
-						 window.location.href='https://mobile.shuyu-global.com/#/pages/login/login'
+						 redirectToLogin()
 						// uni.redirectTo({
 						// 	url: '/pages/login/login'
 						// })
@@ -64,7 +73,7 @@ function myRequest(options, retry=3, domain='https://epluscanada.com') {
 						icon: 'none'
 					})
 					uni.setStorageSync('YjaccessToken', '');
-					window.location.href='https://mobile.shuyu-global.com/#/pages/login/login'
+					redirectToLogin()
 					// uni.navigateTo({
 					// 	url:'/pages/login/login'
 					// })
@@ -113,7 +122,7 @@ function myRequestOne(options, retry=3) {
 					//	icon: 'none'
 					//})
 					//setTimeout(function() {
-						window.location.href='https://mobile.shuyu-global.com/#/pages/login/login'
+						redirectToLogin()
 						// uni.redirectTo({
 						// 	url: '/pages/login/login'
 						// })
@@ -206,8 +215,9 @@ function addSubscriber(callback) {
 }
 
 export default {
-	
+
 	baseUrl,
 	myRequest,
 	myRequestOne,
+	redirectToLogin,
 }

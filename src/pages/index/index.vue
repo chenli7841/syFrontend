@@ -243,7 +243,7 @@
 						})
 						.catch(error => {});
 				} catch(e) {
-					window.location.href='https://mobile.shuyu-global.com/#/pages/login/login'
+					this.request.redirectToLogin()
 				}
 			},
 			to(){
