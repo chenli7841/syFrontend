@@ -5,7 +5,21 @@
 				筛选查询
 			</view>
 		</view> -->
-		<view class="list" v-if="title == '未付款' || type == 20 || type == 1 || type == 5 || type == 100 || type == ''">
+		<view class="summary bfff" v-if="type == 30">
+			<view class="summary-item">
+				<text class="f22 c666">总单数</text>
+				<text class="f32 c333 fb">{{ totalCount }}</text>
+			</view>
+			<view class="summary-item">
+				<text class="f22 c666">总计费重量</text>
+				<text class="f32 c333 fb">{{ totalWeight }}</text>
+			</view>
+			<view class="summary-item">
+				<text class="f22 c666">总运费</text>
+				<text class="f32 c333 fb">${{ totalShippingCost }}</text>
+			</view>
+		</view>
+		<view class="list" v-if="title == '未付款' || type == 20 || type == 1 || type == 5 || type == 100 || type == '' || type == 30">
 			<view class="list-li bfff" v-for="(item, index) in orderList" :key="index">
 				<view class="num">
 					<view class="num-left c333 f26">
@@ -25,10 +39,13 @@
 					</view>
 					<view class="countO num-left">
 						<text class="textO f24 c666">创建时间：{{ item.datecreated ? item.datecreated : '-' }}</text>
-						<text v-if="type == '' || type == 100 || title == '未付款'" class="textT f24 c666">总运费：${{ item.shippingcost ? item.shippingcost : '-' }}</text>
+						<text v-if="type == '' || type == 100 || type == 30 || title == '未付款'" class="textT f24 c666">总运费：${{ item.shippingcost ? item.shippingcost : '-' }}</text>
+					</view>
+					<view class="countO num-left marginBottom10" v-if="type == 30">
+						<text class="textO f24 c666">计费重量：{{ item.weightkg ? item.weightkg : '-' }}</text>
 					</view>
 					<view class="countO num-left marginBottom10">
-						<text class="textO  f24 c666">线路：{{ item.route ? item.route : '-' }}</text>
+						<text class="textO  f24 c666">线路：{{ getRouteName(item) }}</text>
 					</view>
 					<view class="countO num-left marginBottom10">
 						<text class="textO f24 c666">包裹内件：</text>
@@ -55,7 +72,7 @@
 					<text @click="toLoistics(item)" class="f24 c666 bor">物流详情</text>
 					<text @click="del(item.id)" class="f24 bors">删除包裹</text>
 				</view>
-				<view class="btn" v-if="type == 20 || type == 100 || type == 5 || type == '' || title == '未付款'">
+				<view class="btn" v-if="type == 20 || type == 100 || type == 5 || type == 30 || type == '' || title == '未付款'">
 					<text @click="toLuggage(item)" class="f24 capp">包裹详情</text>
 					<text @click="toLoistics(item)" class="f24 c666 bor">物流详情</text>
 				</view>
@@ -242,6 +259,17 @@ export default {
 			}
 		};
 	},
+	computed: {
+		totalCount() {
+			return this.orderList.length;
+		},
+		totalWeight() {
+			return this.orderList.reduce((sum, item) => sum + (Number(item.weightkg) || 0), 0).toFixed(2);
+		},
+		totalShippingCost() {
+			return this.orderList.reduce((sum, item) => sum + (Number(item.shippingcost) || 0), 0).toFixed(2);
+		}
+	},
 	onLoad(op) {
 		this.type = op.type;
 		this.title = op.name;
@@ -369,6 +397,9 @@ export default {
 					data: this.screen
 				})
 				.then(res => {
+					if (this.type == 30 && res.data.content.length > 0) {
+						console.log('待提货订单字段排查', res.data.content[0]);
+					}
 					var list = this.orderList.concat(res.data.content);
 					list.forEach(item => {
 						const matched = this.orderState.find(({ id }) => id == item.state);
@@ -390,10 +421,14 @@ export default {
 					} else {
 						this.status = 'nomore';
 					}
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		//批次列表
 		batch() {
+			this.status = 'loading';
 			this.request
 				.myRequest({
 					url: '/api/batch',
@@ -412,6 +447,9 @@ export default {
 					} else {
 						this.status = 'nomore';
 					}
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		// 线路
@@ -429,6 +467,14 @@ export default {
 					this.circuitData = res.data.content;
 					//console.log(res.data.content);
 				});
+		},
+		//线路名称：订单本身没有存route文本时，按routeid从线路列表里查
+		getRouteName(item) {
+			if (item.route) {
+				return item.route;
+			}
+			var matched = this.circuitData.find(r => r.id === item.routeid);
+			return matched ? matched.name : '-';
 		},
 		//选择线路
 		confirmRote(e) {
@@ -563,6 +609,22 @@ export default {
 <style lang="scss" scoped>
 .index {
 	margin-bottom: 300upx;
+	.summary {
+		width: 100%;
+		margin-top: 16upx;
+		padding: 30upx 0;
+		box-sizing: border-box;
+		display: flex;
+		.summary-item {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text {
+				margin-bottom: 8upx;
+			}
+		}
+	}
 	.list {
 		width: 100%;
 		padding-top: 16upx;

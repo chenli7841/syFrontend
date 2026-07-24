@@ -1,0 +1,5 @@
+/**
+ * uni-app 全局 scss 文件，会被自动注入到每个 scss 编译单元中
+ * 这里额外引入 uview-ui 的主题变量，解决组件内 $u-xxx 变量未定义的报错
+ */
+@import "~uview-ui/theme.scss";

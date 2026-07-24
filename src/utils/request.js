@@ -45,6 +45,7 @@ function myRequest(options, retry=3, domain='https://epluscanada.com') {
 						// })
 
 					//}, 1500);
+					rej(data)
 				} else if (data.statusCode == 402) {
 					//uni.showToast({
 					//	title: '您的登录状态已失效，请先登录',
@@ -58,6 +59,7 @@ function myRequest(options, retry=3, domain='https://epluscanada.com') {
 						// 	url: '/pages/login/login'
 						// })
 					//}, 2000);
+					rej(data)
 				} else if (data.statusCode == 420) {
 					
 					uni.showToast({
@@ -77,26 +79,35 @@ function myRequest(options, retry=3, domain='https://epluscanada.com') {
 					// uni.navigateTo({
 					// 	url:'/pages/login/login'
 					// })
+					rej(data)
 				} else if (data.statusCode == 500) {
+					console.error('接口500错误：', options.url, data.data)
 					uni.showToast({
 						title: '服务器打小报告啦',
 						duration: 2000,
 						icon: 'none'
 					})
-					// res(data)
+					rej(data)
 				} else if (data.statusCode == 200 || data.statusCode == 201) {
 					res(data)
+				} else {
+					uni.showToast({
+						title: '请求失败，请稍后重试',
+						duration: 2000,
+						icon: 'none'
+					})
+					rej(data)
 				}
 			},
 			fail(error) {
-				//uni.showToast({
-				//	title: '请求超时,请检查网络',
-				//	duration: 2000,
-				//	icon: 'none'
-				//})
 				if (retry > 0) {
-					myRequest(options, retry-1);
+					myRequest(options, retry - 1, domain).then(res).catch(rej);
 				} else {
+					uni.showToast({
+						title: '网络异常，请检查网络后重试',
+						duration: 2000,
+						icon: 'none'
+					})
 					rej(error);
 				}
 			}
@@ -127,6 +138,7 @@ function myRequestOne(options, retry=3) {
 						// 	url: '/pages/login/login'
 						// })
 					//}, 2000);
+					rej(data)
 				} else if (data.statusCode == 420) {
 					uni.showToast({
 						title: data.data.message,
@@ -140,22 +152,28 @@ function myRequestOne(options, retry=3) {
 						duration: 2000,
 						icon: 'none'
 					})
-				
+					rej(data)
 				}else if (data.statusCode == 200 || data.statusCode == 201) {
 					res(data)
+				} else {
+					uni.showToast({
+						title: '请求失败，请稍后重试',
+						duration: 2000,
+						icon: 'none'
+					})
+					rej(data)
 				}
-			
+
 			},
 			fail(error) {
-			
-				//uni.showToast({
-				//	title: '请求超时,请检查网络',
-				//	duration: 2000,
-				//	icon: 'none'
-				//})
 				if (retry > 0) {
-					myRequestOne(options, retry-1);
+					myRequestOne(options, retry - 1).then(res).catch(rej);
 				} else {
+					uni.showToast({
+						title: '网络异常，请检查网络后重试',
+						duration: 2000,
+						icon: 'none'
+					})
 					rej(error)
 				}
 			}

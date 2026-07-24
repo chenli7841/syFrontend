@@ -91,6 +91,9 @@ export default {
 						}
 					];
 					this.circuit(id, res.data.content);
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		//仓库
@@ -137,6 +140,9 @@ export default {
 					this.status='nomore'
 					this.circuitData = res.data.content;
 					console.log(res.data.content);
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		toOne(e, code, isfromchina,route) {

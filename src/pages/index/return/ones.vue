@@ -218,6 +218,9 @@ components:{
 					}else{
 						this.status='nomore';
 					}
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		toWhy(item) {

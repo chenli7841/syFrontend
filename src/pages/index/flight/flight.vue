@@ -141,7 +141,9 @@ export default {
 					this.list = res.data.content;
 					this.status='nomore'
 				})
-				.catch(error => {});
+				.catch(() => {
+					this.status = 'nomore';
+				});
 		},
 		details() {
 			uni.navigateTo({

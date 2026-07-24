@@ -450,6 +450,9 @@ export default {
 						this.status = 'nomore';
 					}
 					this.totalElements = res.data.totalElements;
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		//批次列表
@@ -474,6 +477,9 @@ export default {
 					} else {
 						this.status = 'nomore';
 					}
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		//筛查

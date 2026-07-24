@@ -259,6 +259,9 @@ export default {
 					} else {
 						this.status = 'nomore';
 					}
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		//高级账户自提点

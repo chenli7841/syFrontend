@@ -3,8 +3,7 @@
 		<view class="top">
 			<view class="cfff f26">{{ bacth.name }}</view>
 			<view class="count">
-				<text class="cfff f26">总重量：{{ totalWeightKg }}</text>
-				<text class="cfff f26">总费用：{{ totalShippingCost }}</text>
+				<text class="cfff f26">总重量：{{ totalWeightKg.toFixed(2) }}</text>
 				<text class="cfff f26">包裹数：{{ number }}</text>
 			</view>
 		</view>
@@ -29,7 +28,7 @@
 					</view>
 					<view class="countO">
 						<text class="textO f24 c666">箱数：{{ item.baggagenum ? item.baggagenum : '-' }}</text>
-						<text class="textT f24 c666">线路：{{ item.route ? item.route : '-' }}</text>
+						<text class="textT f24 c666">线路：{{ getRouteName(item) }}</text>
 					</view>
 					<view class="countO">
 						<text class="textT f24 c666">取货点：{{item.pickUpLocationName}}</text>
@@ -53,10 +52,10 @@ export default {
 	data() {
 		return {
 			number: 0,
-			totalShippingCost: 0,
 			totalWeightKg: 0,
 			bacth: '',
 			orderList: [],
+			circuitData: [],
 			iconType: 'flower',
 			loadText: {
 				loadmore: '上拉加载更多',
@@ -89,13 +88,13 @@ export default {
 	onShow() {
 		this.screen.page = 1;
 		this.orderList = [];
-		this.totalShippingCost = 0;
 		this.totalWeightKg = 0;
 		this.number = 0;
 		this.bacth = uni.getStorageSync('yjitem');
 		this.screen.batchId = this.bacth.id;
 
 		this.order();
+		this.circuit();
 	},
 	methods: {
 		//查看物流
@@ -103,6 +102,25 @@ export default {
 			uni.navigateTo({
 				url: '../flight/logisticsDetails?item=' + JSON.stringify(item)
 			});
+		},
+		//线路
+		circuit() {
+			this.request
+				.myRequest({
+					url: '/api/route',
+					data: { page: 1, size: 100 }
+				})
+				.then(res => {
+					this.circuitData = res.data.content;
+				});
+		},
+		//线路名称：订单本身没有存route文本时，按routeid从线路列表里查
+		getRouteName(item) {
+			if (item.route) {
+				return item.route;
+			}
+			var matched = this.circuitData.find(r => r.id === item.routeid);
+			return matched ? matched.name : '-';
 		},
 		//订单列表
 		order() {
@@ -118,7 +136,6 @@ export default {
 					this.number = this.orderList.length;
 					if (this.orderList.length > 0) {
 						this.orderList.forEach(element => {
-							this.totalShippingCost += element.shippingcost * 1;
 							this.totalWeightKg += element.weightkg * 1;
 						});
 					}
@@ -134,6 +151,9 @@ export default {
 					} else {
 						this.status = 'nomore';
 					}
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		}
 	}

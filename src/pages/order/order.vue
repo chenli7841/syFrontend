@@ -252,6 +252,9 @@ export default {
 						this.loadRoutes(this.order.warehouseid);
 					}
 					this.status='nomore'
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		loadRoutes(warehouseid) {

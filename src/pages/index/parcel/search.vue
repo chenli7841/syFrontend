@@ -375,6 +375,9 @@ export default {
 					} else {
 						this.status = 'nomore';
 					}
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		//批次列表
@@ -397,6 +400,9 @@ export default {
 					} else {
 						this.status = 'nomore';
 					}
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		// 线路

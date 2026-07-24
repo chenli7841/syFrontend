@@ -440,6 +440,9 @@ export default {
 						this.status = 'nomore';
 					}
 					this.totalElements = res.data.totalElements;
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		//筛查

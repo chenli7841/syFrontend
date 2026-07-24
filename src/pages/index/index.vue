@@ -113,6 +113,20 @@
 						<text class="fb f36">{{orderNumbers.inWarehouseCount ? orderNumbers.inWarehouseCount:0}}</text>
 					</view>
 				</view>
+				<view class="typea-li" @click="toWaitPickupParcel()">
+					<image src="../../static/index/waitpickup.svg" mode=""></image>
+					<view class="li-info">
+						<text class="f24">待提货包裹</text>
+						<text class="fb f36">{{waitPickupCount}}</text>
+					</view>
+				</view>
+				<view class="typea-li" @click="toShipSchedule()">
+					<image src="../../static/index/shipschedule.svg" mode=""></image>
+					<view class="li-info">
+						<text class="f24">船期查询</text>
+						<text class="fb f36">{{scheduleBatchCount}}</text>
+					</view>
+				</view>
 			</view>
 		</view>
 
@@ -162,6 +176,8 @@
 				orderNumbers:'',
 				account:false,
 				orderStartNumber: '',
+				waitPickupCount: 0,
+				scheduleBatchCount: 0,
 			}
 		},
 		onLoad(e) {
@@ -169,13 +185,15 @@
 			if(e.token){
 					uni.setStorageSync('YjaccessToken', e.token);
 					uni.setStorageSync('YjuserInfo', {id:e.id});
-					
+
 			}
 		},
 		onShow() {
 			this.getUserInfo();
 			this.orderNumber();
 			this.banner();
+			this.getWaitPickupCount();
+			this.getScheduleBatchCount();
 			this.$parcelInfo.orderbaggageVoList = [
 				{
 					itemVoList: []
@@ -276,6 +294,16 @@
 					url:'/pages/index/parcel/inParcels?type=5&name=已入库'
 				})
 			},
+			toWaitPickupParcel(){
+				uni.navigateTo({
+					url:'/pages/index/parcel/inParcels?type=30&name=待提货'
+				})
+			},
+			toShipSchedule(){
+				uni.navigateTo({
+					url:'/pages/index/flight/schedule'
+				})
+			},
 			extractGoods(){
 				uni.navigateTo({
 					url:'/pages/index/extractGoods/extractGoods'
@@ -295,6 +323,48 @@
 					.then(res => {
 						this.orderNumbers=res.data;
 					});
+			},
+			//待提货包裹数：直接按state=30统计实际包裹数
+			getWaitPickupCount() {
+				this.request
+					.myRequest({
+						url: '/api/order',
+						data: { state: 30, page: 1, size: 1 }
+					})
+					.then(res => {
+						this.waitPickupCount = res.data.totalElements;
+					})
+					.catch(() => {});
+			},
+			//船期查询：统计内部有当前用户运单的批次数
+			getScheduleBatchCount() {
+				this.request
+					.myRequest({
+						url: '/api/batch/getBatchsAndExpress',
+						method: 'GET',
+						data: { page: 1, size: 100, grouptype: 40 }
+					})
+					.then(res => {
+						var batches = res.data.content.filter(item => item.stage <= 7);
+						if (batches.length === 0) {
+							this.scheduleBatchCount = 0;
+							return;
+						}
+						Promise.all(
+							batches.map(item =>
+								this.request
+									.myRequest({
+										url: '/api/order',
+										data: { batchId: item.id, page: 1, size: 1 }
+									})
+									.then(r => r.data.totalElements)
+									.catch(() => 0)
+							)
+						).then(counts => {
+							this.scheduleBatchCount = counts.filter(c => c > 0).length;
+						});
+					})
+					.catch(() => {});
 			},
             navto(url){
 				uni.navigateTo({
@@ -403,7 +473,8 @@
 
 			}
 			.typea-li{
-				flex: 1;
+				flex: none;
+				width: 48%;
 				height: 140upx;
 				border-radius: 20upx;
 				display: flex;

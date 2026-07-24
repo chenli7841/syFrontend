@@ -131,6 +131,9 @@ export default {
 				}else{
 					this.status='nomore';
 				}
+				})
+				.catch(() => {
+					this.status = 'nomore';
 				});
 		},
 		//筛查

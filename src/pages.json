@@ -375,6 +375,13 @@
 		}
 	},
 	{
+		"path": "pages/index/flight/schedule",
+		"style": {
+			"navigationBarTitleText": "船期查询",
+			"navigationBarBackgroundColor": "#fff"
+		}
+	},
+	{
 		"path": "pages/index/flight/logisticsDetails",
 		"style": {
 			"navigationBarTitleText": "物流状态",
